@@ -14,7 +14,7 @@ import SwiftUI
 
 class EmojiMemoryGame: ObservableObject{
 
-
+typealias Card = MemoryGame<String>.Card
     
     private static let Halloweenemojis = ["👻", "🎃", "🕷️", "🧛‍♀️", "👽", "😱", "🥷", "🧟‍♂️", "🕸️", "⚡️"]
     
@@ -57,12 +57,16 @@ class EmojiMemoryGame: ObservableObject{
     
     @Published var score: Int = 0
 
-    var cards: Array<MemoryGame<String>.Card> {
-        return model.cards
+    var cards: Array<Card> {
+        model.cards
     }
     
-    func score(for card: MemoryGame<String>.Card) -> Int {
+    func score(for card: Card) -> Int {
         return card.score
+    }
+    
+    var color: Color{
+        .orange
     }
 
 
@@ -75,12 +79,12 @@ class EmojiMemoryGame: ObservableObject{
     }
     // Функция, которая перемешиввет карты.
 
-    func choose(_ card: MemoryGame<String>.Card){
+    func choose(_ card: Card){
         model.choose(card)
         updateScore()
     }
     
-    func scoring(_ card: MemoryGame<String>.Card){
+    func scoring(_ card: Card){
         model.scoring(card)
         updateScore()
     }
