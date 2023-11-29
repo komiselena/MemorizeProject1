@@ -8,11 +8,15 @@
 import SwiftUI
 
 struct FlyingNumber: View {
+    let number: Int
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        if number != 0{
+            Text(number, format: .number)
+        }
     }
 }
 
 #Preview {
-    FlyingNumber()
+    FlyingNumber(number: 5)
 }

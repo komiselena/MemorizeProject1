@@ -21,35 +21,54 @@ struct EmojiMemoryGameView: View {
         VStack{
             Text("Memorize!")
                 .font(.largeTitle)
-            Text("Score: \(viewModel.score)")
-                .font(.title2)
+            score
             cards
-                    .animation(.default, value: viewModel.cards)
             HStack{
-                Button("Shuffle"){
-                    viewModel.shuffle()
-                }
+                buttonShuffle
                 Spacer()
-                Button("New Game"){
-                    viewModel.newGame()
-                    viewModel.shuffle()
-                }
+                buttonNewGame
             }
         }
         .padding()
     }
 
+    private var score: some View{
+        Text("Score: \(viewModel.score)")
+            .font(.title2)
+            .animation(nil)
+    }
+    private var buttonNewGame: some View{
+        Button("New Game"){
+            viewModel.newGame()
+            viewModel.shuffle()
+        }
+    }
+    private var buttonShuffle: some View{
+        Button("Shuffle"){
+            withAnimation{
+                viewModel.shuffle()
+            }
+        }
+    }
     
     private var cards: some View{
         AspectVGrid(viewModel.cards, aspectRatio: aspectRatio){ card in
             CardView(card: card)
                 .padding(spacing)
+                .overlay(FlyingNumber(number: scoreChange(causedBy: card)))
                 .onTapGesture {
-                    viewModel.choose(card)
+                    withAnimation(.easeInOut(duration: 0.5)){
+                        viewModel.choose(card)
+                    }
                 }
             }
         .foregroundColor(viewModel.color)
     }
+    
+    private func scoreChange(causedBy: Card) -> Int{
+        return 0
+    }
+    
 }
 
 // Структура того как выглядят карточки

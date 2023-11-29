@@ -60,81 +60,47 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
                     if cards[chosenIndex].content == cards[potentialMatchIndex].content{
                         cards[chosenIndex].isMatched = true
                         cards[potentialMatchIndex].isMatched = true
-                        scoring(cards[chosenIndex])
-                        
-                    }
+                        score += 2
+                    }else{
+                        if cards[chosenIndex].hasBeenSeen{
+                            score -= 1
+                        }
+                        if cards[potentialMatchIndex].hasBeenSeen{
+                                score -= 1
+                            }
+                        }
                 }else{
                     indexOfTheOneAndOnlyFaceUpCard = chosenIndex
-
                 }
-                
                 cards[chosenIndex].isFaceUp = true
-                flippedOrNot(at: chosenIndex)
             }
         }
     }
-    
-    mutating func flippedOrNot(at chosenIndex: Int){
-        guard !cards[chosenIndex].isMatched else {
-            return
-        }
-        
-        if !cards[chosenIndex].flipped{
-            cards[chosenIndex].flipped = true
-            cards[chosenIndex].cardHasAlreadyBeenSeen = true
-        }
-        if cards[chosenIndex].isMatched{
-            cards[chosenIndex].twoSimiliarCards = true
-        }
-        
-    }
-    
 
-
-    mutating func scoring(_ card: Card){
-        if card.twoSimiliarCards{
-            score += 2
-        }else if card.cardHasAlreadyBeenSeen{
-            score -= 1
-        }else{
-            score += 0
-        }
-    }
     
     mutating func shuffle(){
         cards.shuffle()
     }
-    
-    mutating func calculateScore() -> Int {
-        var currentScore = 0
 
-        for index in cards.indices {
-            if cards[index].isMatched {
-                currentScore += 2
-            } else if cards[index].cardHasAlreadyBeenSeen {
-                currentScore -= 1
-            }
-        }
-
-        return currentScore
-    }
-    
-    
     struct Card: Equatable, Identifiable, CustomDebugStringConvertible {
         
-        var isFaceUp: Bool = false
+        var isFaceUp: Bool = false{
+            didSet{
+                if oldValue && !isFaceUp{
+                    hasBeenSeen = true
+                }
+            }
+        }
         var isMatched: Bool = false
         let content: CardContent
-        var flipped: Bool = false
-        var cardHasAlreadyBeenSeen: Bool = false
-        var twoSimiliarCards: Bool = false
-        var twoDifferentCards: Bool = false
+        var hasBeenSeen: Bool = false
+        
         
         var score: Int = 0
         var id: String
 
         var debugDescription: String {
-            return "\(id): \(content), \(isFaceUp ? "up" : "down")\(isMatched ? "matched" : ""), \(cardHasAlreadyBeenSeen ? "true" : "false"), \(twoSimiliarCards ? "true" : "false"), \(twoDifferentCards ? "true" : "false")"
+            return "\(id): \(content), \(isFaceUp ? "up" : "down")\(isMatched ? "matched" : "")"
         }
         
     }
