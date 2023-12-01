@@ -34,7 +34,6 @@ typealias Card = MemoryGame<String>.Card
     func newGame(){
         let randomTheme: [String] = EmojiMemoryGame.ThemeEmojis.randomElement() ?? []
         self.model = EmojiMemoryGame.createMemoryGame(with: randomTheme)
-        score = 0
         objectWillChange.send()
     }
     // Здесь функция для того, чтобы появлялась новая игра с новой темой, рандомно выбранной из массива тем.
@@ -54,21 +53,18 @@ typealias Card = MemoryGame<String>.Card
     }
         
     @Published private var model: MemoryGame<String>
-    
-    @Published var score: Int = 0
 
     var cards: Array<Card> {
         model.cards
     }
-    
-    func score(for card: Card) -> Int {
-        return card.score
-    }
-    
+
     var color: Color{
         .orange
     }
 
+    var score: Int {
+        model.score
+    }
 
     // MARK: - Intents
 
@@ -81,16 +77,7 @@ typealias Card = MemoryGame<String>.Card
 
     func choose(_ card: Card){
         model.choose(card)
-        updateScore()
     }
     
-    func scoring(_ card: Card){
-        model.scoring(card)
-        updateScore()
-    }
-    private func updateScore(){
-        score = model.calculateScore()
-        objectWillChange.send()
-    }
     
 }
