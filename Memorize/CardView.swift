@@ -17,6 +17,19 @@ struct CardView: View {
 
     
     var body: some View {
+<<<<<<< HEAD
+        TimelineView(.animation){ timeline in
+            if card.isFaceUp || !card.isMatched {
+                Pie(endAngle: .degrees(card.bonusPercentRemaining * 360))
+                    .opacity(Constants.Pie.opacity)
+                    .overlay(cardContents.padding(Constants.Pie.inset))
+                    .padding(Constants.inset)
+                    .cardify(isFaceUp: card.isFaceUp)
+                    .transition(.scale)
+            }else{
+                Color.clear
+            }
+=======
         Pie(endAngle: .degrees(240))
             .opacity(Constants.Pie.opacity)
             .overlay(
@@ -33,7 +46,19 @@ struct CardView: View {
             .padding(Constants.inset)
             .cardify(isFaceUp: card.isFaceUp)
             .opacity(card.isFaceUp || !card.isMatched ? 1 : 0)
+>>>>>>> main
         }
+    }
+    
+    var cardContents: some View{
+            Text(card.content)
+                .font(.system(size: Constants.FontSize.largest))
+                .minimumScaleFactor(Constants.FontSize.smallest /
+                                    Constants.FontSize.largest)
+                .aspectRatio(1, contentMode: .fit)
+                .rotationEffect(.degrees(card.isMatched ? 360 : 0))
+                .animation(.spin(duration: 1), value: card.isMatched)
+    }
     
     private struct Constants {
         static let cornerRadius: CGFloat = 12
