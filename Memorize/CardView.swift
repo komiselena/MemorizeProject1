@@ -17,6 +17,7 @@ struct CardView: View {
 
     
     var body: some View {
+<<<<<<< HEAD
         TimelineView(.animation){ timeline in
             if card.isFaceUp || !card.isMatched {
                 Pie(endAngle: .degrees(card.bonusPercentRemaining * 360))
@@ -28,6 +29,24 @@ struct CardView: View {
             }else{
                 Color.clear
             }
+=======
+        Pie(endAngle: .degrees(240))
+            .opacity(Constants.Pie.opacity)
+            .overlay(
+        
+        Text(card.content)
+            .font(.system(size: Constants.FontSize.largest))
+            .minimumScaleFactor(Constants.FontSize.smallest /
+            Constants.FontSize.largest)
+            .aspectRatio(1, contentMode: .fit)
+            .padding(Constants.Pie.inset)
+            .rotationEffect(.degrees(card.isMatched ? 360 : 0))
+            .animation(.spin(duration: 1), value: card.isMatched)
+        )
+            .padding(Constants.inset)
+            .cardify(isFaceUp: card.isFaceUp)
+            .opacity(card.isFaceUp || !card.isMatched ? 1 : 0)
+>>>>>>> main
         }
     }
     

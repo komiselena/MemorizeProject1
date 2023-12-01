@@ -29,8 +29,11 @@ struct EmojiMemoryGameView: View {
             HStack{
                 buttonShuffle
                 Spacer()
+<<<<<<< HEAD
                 deck.foregroundColor(.orange)
                 Spacer()
+=======
+>>>>>>> main
                 buttonNewGame
             }
         }
@@ -58,6 +61,7 @@ struct EmojiMemoryGameView: View {
     
     private var cards: some View{
         AspectVGrid(viewModel.cards, aspectRatio: aspectRatio){ card in
+<<<<<<< HEAD
             if isDealt(card){
                 CardView(card: card)
                     .matchedGeometryEffect(id: card.id, in: dealingNamespace)
@@ -69,12 +73,23 @@ struct EmojiMemoryGameView: View {
                         choose(card)
                     }
                     
+=======
+            CardView(card: card)
+                .padding(spacing)
+                .overlay(FlyingNumber(number: scoreChange(causedBy: card)))
+                .onTapGesture {
+                    withAnimation(.easeInOut(duration: 0.5)){
+                        viewModel.choose(card)
+                    }
+                }
+>>>>>>> main
             }
         }
         
         .foregroundColor(viewModel.color)
     }
     
+<<<<<<< HEAD
     @State private var dealt = Set<Card.ID>()
     
     private func isDealt(_ card: Card) -> Bool {
@@ -128,6 +143,10 @@ struct EmojiMemoryGameView: View {
     private func scoreChange(causedBy card: Card) -> Int{
         let (amount, id) = lastScoreChange
         return card.id == id ? amount : 0
+=======
+    private func scoreChange(causedBy: Card) -> Int{
+        return 0
+>>>>>>> main
     }
     
 }
