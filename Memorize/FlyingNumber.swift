@@ -2,15 +2,13 @@
 //  FlyingNumber.swift
 //  Memorize
 //
-<<<<<<< HEAD
+
 //  Created by Mac on 29.11.2023.
-=======
-<<<<<<< HEAD
+
 //  Created by Mac on 30.11.2023.
-=======
+
 //  Created by Mac on 29.11.2023.
->>>>>>> main
->>>>>>> first
+
 //
 
 import SwiftUI
@@ -18,12 +16,11 @@ import SwiftUI
 struct FlyingNumber: View {
     let number: Int
     
-<<<<<<< HEAD
+
     var body: some View {
         if number != 0{
             Text(number, format: .number)
-=======
-<<<<<<< HEAD
+
     @State private var offset: CGFloat = 0
     
     var body: some View {
@@ -42,12 +39,11 @@ struct FlyingNumber: View {
                 .onDisappear{
                     offset = 0
                 }
-=======
+
     var body: some View {
         if number != 0{
             Text(number, format: .number)
->>>>>>> main
->>>>>>> first
+
         }
     }
 }
