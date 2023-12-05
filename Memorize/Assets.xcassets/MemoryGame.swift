@@ -60,15 +60,9 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
                     if cards[chosenIndex].content == cards[potentialMatchIndex].content{
                         cards[chosenIndex].isMatched = true
                         cards[potentialMatchIndex].isMatched = true
-<<<<<<< HEAD
                         score += 2
-=======
-<<<<<<< HEAD
                         score += 2 + cards[chosenIndex].bonus + cards[potentialMatchIndex].bonus
-=======
                         score += 2
->>>>>>> main
->>>>>>> first
                     }else{
                         if cards[chosenIndex].hasBeenSeen{
                             score -= 1
@@ -90,56 +84,33 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
         cards.shuffle()
     }
 
-    struct Card: Equatable, Identifiable, CustomDebugStringConvertible {
-        
-        var isFaceUp: Bool = false{
-            didSet{
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-                if isFaceUp{
+    struct Card: Equatable, Identifiable, CustomStringConvertible {
+        var isFaceUp = false {
+            didSet {
+                if isFaceUp {
                     startUsingBonusTime()
-                } else{
+                } else {
                     stopUsingBonusTime()
                 }
-=======
->>>>>>> main
->>>>>>> first
-                if oldValue && !isFaceUp{
+                if oldValue && !isFaceUp {
                     hasBeenSeen = true
                 }
             }
         }
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-        var hasBeenSeen: Bool = false
-        var isMatched: Bool = false{
-            didSet{
-                if isMatched{
+        var hasBeenSeen = false
+        var isMatched = false {
+            didSet {
+                if isMatched {
                     stopUsingBonusTime()
                 }
             }
         }
         let content: CardContent
-=======
->>>>>>> first
-        var isMatched: Bool = false
-        let content: CardContent
-        var hasBeenSeen: Bool = false
-        
-<<<<<<< HEAD
-=======
->>>>>>> main
->>>>>>> first
         
         var id: String
-        var debugDescription: String {
-            return "\(id): \(content), \(isFaceUp ? "up" : "down")\(isMatched ? "matched" : "")"
+        var description: String {
+            "\(id): \(content) \(isFaceUp ? "up" : "down")\(isMatched ? " matched" : "")"
         }
-        
-    
-
         
         // MARK: - Bonus Time
         
@@ -189,10 +160,8 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
     }
 }
 
-
-
-extension Array{
-    var only: Element?{
+extension Array {
+    var only: Element? {
         count == 1 ? first : nil
     }
 }
