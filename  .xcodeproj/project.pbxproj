@@ -16,11 +16,11 @@
 		04554F302B023513006E6913 /* MemorizeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04554F2F2B023513006E6913 /* MemorizeUITestsLaunchTests.swift */; };
 		04554F3D2B023565006E6913 /* MemoryGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04554F3C2B023565006E6913 /* MemoryGame.swift */; };
 		04554F3F2B0280AB006E6913 /* EmojiMemoryGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04554F3E2B0280AB006E6913 /* EmojiMemoryGame.swift */; };
+		046011DC2B1F592C006E4F4D /* FlyingNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046011DB2B1F592C006E4F4D /* FlyingNumber.swift */; };
 		04BD54322B16452700591CB0 /* AspectVGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD54312B16452700591CB0 /* AspectVGrid.swift */; };
 		04BD54342B16489400591CB0 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD54332B16489400591CB0 /* CardView.swift */; };
 		04BD54362B164D8200591CB0 /* Pie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD54352B164D8200591CB0 /* Pie.swift */; };
 		04BD54382B16551700591CB0 /* Cardify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BD54372B16551700591CB0 /* Cardify.swift */; };
-		04E63AE82B1B9FFC00108DFF /* FlyingNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E63AE72B1B9FFC00108DFF /* FlyingNumber.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,11 +53,11 @@
 		04554F2F2B023513006E6913 /* MemorizeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		04554F3C2B023565006E6913 /* MemoryGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MemoryGame.swift; path = Assets.xcassets/MemoryGame.swift; sourceTree = "<group>"; };
 		04554F3E2B0280AB006E6913 /* EmojiMemoryGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiMemoryGame.swift; sourceTree = "<group>"; };
+		046011DB2B1F592C006E4F4D /* FlyingNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlyingNumber.swift; sourceTree = "<group>"; };
 		04BD54312B16452700591CB0 /* AspectVGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectVGrid.swift; sourceTree = "<group>"; };
 		04BD54332B16489400591CB0 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		04BD54352B164D8200591CB0 /* Pie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pie.swift; sourceTree = "<group>"; };
 		04BD54372B16551700591CB0 /* Cardify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cardify.swift; sourceTree = "<group>"; };
-		04E63AE72B1B9FFC00108DFF /* FlyingNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FlyingNumber.swift; path = "../../Memorize L9/Memorize/FlyingNumber.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,11 +108,11 @@
 		04554F112B023511006E6913 /* Memorize */ = {
 			isa = PBXGroup;
 			children = (
+				046011DB2B1F592C006E4F4D /* FlyingNumber.swift */,
 				04554F3C2B023565006E6913 /* MemoryGame.swift */,
 				04BD54352B164D8200591CB0 /* Pie.swift */,
 				04BD54372B16551700591CB0 /* Cardify.swift */,
 				04554F3E2B0280AB006E6913 /* EmojiMemoryGame.swift */,
-				04E63AE72B1B9FFC00108DFF /* FlyingNumber.swift */,
 				04554F142B023511006E6913 /* EmojiMemoryGameView.swift */,
 				04BD54332B16489400591CB0 /* CardView.swift */,
 				04BD54312B16452700591CB0 /* AspectVGrid.swift */,
@@ -280,7 +280,7 @@
 			files = (
 				04554F152B023511006E6913 /* EmojiMemoryGameView.swift in Sources */,
 				04554F3D2B023565006E6913 /* MemoryGame.swift in Sources */,
-				04E63AE82B1B9FFC00108DFF /* FlyingNumber.swift in Sources */,
+				046011DC2B1F592C006E4F4D /* FlyingNumber.swift in Sources */,
 				04BD54382B16551700591CB0 /* Cardify.swift in Sources */,
 				04554F132B023511006E6913 /* MemorizeApp.swift in Sources */,
 				04BD54322B16452700591CB0 /* AspectVGrid.swift in Sources */,
@@ -456,8 +456,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -486,8 +485,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
