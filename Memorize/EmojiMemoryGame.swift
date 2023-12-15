@@ -17,7 +17,7 @@ class EmojiMemoryGame: ObservableObject{
     @Published private(set) var model: MemoryGame<String>
     
     func newGame(){
-        model = EmojiMemoryGame.createMemoryGame(with: chosenTheme.emojis)
+        var newGame = createMemoryGame(with: chosenTheme.emojis)
         objectWillChange.send()
     }
     // chosenTheme это тема которую пользователь выбрал в навигации
@@ -25,18 +25,19 @@ class EmojiMemoryGame: ObservableObject{
     init(theme: EmojiMemoryTheme? = nil) {
         self.store = EmojiMemoryThemeStore(named: "Store")
         self.chosenTheme = theme ?? EmojiMemoryTheme.templates.randomElement()!
-        self.model = EmojiMemoryGame.createMemoryGame(with: chosenTheme.emojis)
+        let emojis = self.chosenTheme.emojis.shuffled()
+        model = MemoryGame(numberOfPairsOfCards: self.chosenTheme.emojis.count) { emojis[$0] }
     }
 
     
-    static func createMemoryGame(with emojis: [String]) -> MemoryGame<String> {
+    func createMemoryGame(with emojis: [String]) -> MemoryGame<String> {
         let shuffledEmojis = emojis.shuffled()
         return MemoryGame(numberOfPairsOfCards: shuffledEmojis.count) { pairIndex in
             guard shuffledEmojis.indices.contains(pairIndex) else {
                 return "⁉️"
             }
             return shuffledEmojis[pairIndex]
-        }
+        } 
     }
         
 

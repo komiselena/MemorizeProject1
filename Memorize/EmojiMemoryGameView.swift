@@ -25,14 +25,7 @@ struct EmojiMemoryGameView: View {
             Text("Memorize!")
                 .font(.largeTitle)
             score
-            NavigationStack{
-                List(store.themes){ theme in
-                    NavigationLink(value: theme){
-                        Text(theme.name)
-                    }
-                    
-                }
-            }
+            
             
         }
         .padding()

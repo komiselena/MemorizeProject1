@@ -14,8 +14,8 @@
             filePath = "Memorize/EmojiMemoryGameView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
             landmarkName = "EmojiMemoryGameView"
             landmarkType = "14">
             <Locations>
@@ -62,8 +62,8 @@
             filePath = "Memorize/EmojiMemoryGameView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
             landmarkName = "deal()"
             landmarkType = "7">
          </BreakpointContent>
