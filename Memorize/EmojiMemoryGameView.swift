@@ -12,6 +12,7 @@ import SwiftUI
 struct EmojiMemoryGameView: View {
     @ObservedObject var viewModel: EmojiMemoryGame
     typealias Card = MemoryGame<String>.Card
+    @ObservedObject var store: EmojiMemoryThemeStore
     
     private let aspectRatio: CGFloat = 4/5
     private let spacing: CGFloat = 4
@@ -20,20 +21,19 @@ struct EmojiMemoryGameView: View {
     private let deckWidth: CGFloat = 50
     
     var body: some View {
-        
         VStack{
             Text("Memorize!")
                 .font(.largeTitle)
             score
-            cards
-                .foregroundColor(.orange)
-            HStack{
-                buttonShuffle
-                Spacer()
-                deck.foregroundColor(.orange)
-                Spacer()
-                buttonNewGame
+            NavigationStack{
+                List(store.themes){ theme in
+                    NavigationLink(value: theme){
+                        Text(theme.name)
+                    }
+                    
+                }
             }
+            
         }
         .padding()
     }
@@ -131,6 +131,6 @@ struct EmojiMemoryGameView: View {
 
 struct EmojiMemoryGameView_Previews: PreviewProvider {
     static var previews: some View {
-        EmojiMemoryGameView(viewModel: EmojiMemoryGame())
+        EmojiMemoryGameView(viewModel: EmojiMemoryGame(), store: EmojiMemoryThemeStore(named: "Preview"))
     }
 }
