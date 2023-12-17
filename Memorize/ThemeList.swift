@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ThemeList: View {
     
+    typealias themes = EmojiMemoryTheme
     @EnvironmentObject var store: EmojiMemoryThemeStore
     @EnvironmentObject var viewModel: EmojiMemoryGame
 
@@ -16,31 +17,17 @@ struct ThemeList: View {
     var body: some View {
         NavigationStack{
             List(store.themes){ theme in
-                NavigationLink(value: theme){
+                NavigationLink(destination: EmojiMemoryGameView(viewModel: EmojiMemoryGame(theme: theme))){
                     Text(theme.name)
                 }
             }
             .navigationTitle("Themes")
-            .navigationDestination(for: EmojiMemoryTheme.self) {theme in
-                ThemeView(theme: theme)
-            }
-            
         }
     }
-}
-
-struct ThemeView: View {
-    let theme: EmojiMemoryTheme
-    @EnvironmentObject var viewModel: EmojiMemoryGame
-    
-    var body: some View{
-        viewModel.createMemoryGame(with: theme.emojis)
-        
-    }
-    
 }
  
 
 #Preview {
     ThemeList()
+        .environmentObject(EmojiMemoryThemeStore(named: "Preview"))
 }

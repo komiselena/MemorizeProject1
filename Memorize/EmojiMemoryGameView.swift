@@ -12,7 +12,6 @@ import SwiftUI
 struct EmojiMemoryGameView: View {
     @ObservedObject var viewModel: EmojiMemoryGame
     typealias Card = MemoryGame<String>.Card
-    @ObservedObject var store: EmojiMemoryThemeStore
     
     private let aspectRatio: CGFloat = 4/5
     private let spacing: CGFloat = 4
@@ -25,8 +24,7 @@ struct EmojiMemoryGameView: View {
             Text("Memorize!")
                 .font(.largeTitle)
             score
-            
-            
+                        
         }
         .padding()
     }
@@ -38,8 +36,8 @@ struct EmojiMemoryGameView: View {
     }
     private var buttonNewGame: some View{
         Button("New Game"){
-            viewModel.newGame()
             viewModel.shuffle()
+            viewModel.newGame()
         }
     }
     private var buttonShuffle: some View{
@@ -124,6 +122,6 @@ struct EmojiMemoryGameView: View {
 
 struct EmojiMemoryGameView_Previews: PreviewProvider {
     static var previews: some View {
-        EmojiMemoryGameView(viewModel: EmojiMemoryGame(), store: EmojiMemoryThemeStore(named: "Preview"))
+        EmojiMemoryGameView(viewModel: EmojiMemoryGame())
     }
 }
