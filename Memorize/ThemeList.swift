@@ -10,7 +10,7 @@ import SwiftUI
 struct ThemeList: View {
     
     typealias themes = EmojiMemoryTheme
-    @EnvironmentObject var store: EmojiMemoryThemeStore
+    @ObservedObject var store: EmojiMemoryThemeStore
     @EnvironmentObject var viewModel: EmojiMemoryGame
 
 
@@ -28,6 +28,5 @@ struct ThemeList: View {
  
 
 #Preview {
-    ThemeList()
-        .environmentObject(EmojiMemoryThemeStore(named: "Preview"))
+    ThemeList(store: EmojiMemoryThemeStore(named: "preview"))
 }

@@ -13,7 +13,7 @@ struct EmojiMemoryGameView: View {
     @ObservedObject var viewModel: EmojiMemoryGame
     typealias Card = MemoryGame<String>.Card
     
-    private let aspectRatio: CGFloat = 4/5
+    private let aspectRatio: CGFloat = 3/4
     private let spacing: CGFloat = 4
     private let dealInterval = 0.15
     private let dealAnimation: Animation = .easeInOut(duration: 1)
@@ -24,6 +24,14 @@ struct EmojiMemoryGameView: View {
             Text("Memorize!")
                 .font(.largeTitle)
             score
+            Spacer()
+            cards
+                .foregroundColor(.orange)
+            HStack{
+                buttonShuffle
+                Spacer()
+                buttonNewGame
+            }
                         
         }
         .padding()
@@ -36,8 +44,8 @@ struct EmojiMemoryGameView: View {
     }
     private var buttonNewGame: some View{
         Button("New Game"){
-            viewModel.shuffle()
             viewModel.newGame()
+            viewModel.shuffle()
         }
     }
     private var buttonShuffle: some View{
@@ -50,15 +58,13 @@ struct EmojiMemoryGameView: View {
     
     private var cards: some View {
         AspectVGrid(viewModel.cards, aspectRatio: aspectRatio) { card in
-            if isDealt(card) {
-                view(for: card)
-                    .padding(spacing)
-                    .overlay(FlyingNumber(number: scoreChange(causedBy: card)))
-                    .zIndex(scoreChange(causedBy: card) != 0 ? 100 : 0)
-                    .onTapGesture {
-                        choose(card)
-                    }
-            }
+            view(for: card)
+                .padding(spacing)
+                .overlay(FlyingNumber(number: scoreChange(causedBy: card)))
+                .zIndex(scoreChange(causedBy: card) != 0 ? 100 : 0)
+                .onTapGesture {
+                    choose(card)
+                }
         }
     }
     
@@ -125,3 +131,5 @@ struct EmojiMemoryGameView_Previews: PreviewProvider {
         EmojiMemoryGameView(viewModel: EmojiMemoryGame())
     }
 }
+
+
