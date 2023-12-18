@@ -17,9 +17,16 @@ class EmojiMemoryGame: ObservableObject{
     @Published private(set) var model: MemoryGame<String>
     
     func newGame(){
-        _ = createMemoryGame(with: chosenTheme.emojis)
+        self.model = createMemoryGame(with: chosenTheme.emojis)
         objectWillChange.send()
     }
+    /*
+     func newGame(){
+         let randomTheme: [String] = EmojiMemoryGame.ThemeEmojis.randomElement() ?? []
+         self.model = EmojiMemoryGame.createMemoryGame(with: randomTheme)
+         objectWillChange.send()
+     }
+     */
     // chosenTheme это тема которую пользователь выбрал в навигации
     
     init(theme: EmojiMemoryTheme? = nil) {

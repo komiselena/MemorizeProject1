@@ -20,11 +20,13 @@ struct EmojiMemoryGameView: View {
     private let deckWidth: CGFloat = 50
     
     var body: some View {
-        VStack{
+        VStack(alignment: .center) {
             Text("Memorize!")
                 .font(.largeTitle)
             score
             Spacer()
+                .frame(maxWidth: .infinity)
+                .frame(height: 0)
             cards
                 .foregroundColor(.orange)
             HStack{
@@ -57,7 +59,7 @@ struct EmojiMemoryGameView: View {
     }
     
     private var cards: some View {
-        AspectVGrid(viewModel.cards, aspectRatio: aspectRatio) { card in
+        return AspectVGrid(viewModel.cards, aspectRatio: aspectRatio) { card in
             view(for: card)
                 .padding(spacing)
                 .overlay(FlyingNumber(number: scoreChange(causedBy: card)))
