@@ -12,6 +12,10 @@ import SwiftUI
 struct EmojiMemoryGameView: View {
     @ObservedObject var viewModel: EmojiMemoryGame
     typealias Card = MemoryGame<String>.Card
+    @ObservedObject var stopwatchManager = StopwatchManager()
+    @State var isProgressView = true
+    @State private var isDelayOut = false
+
     
     private let aspectRatio: CGFloat = 3/4
     private let spacing: CGFloat = 4
@@ -21,22 +25,44 @@ struct EmojiMemoryGameView: View {
     
     var body: some View {
         VStack(alignment: .center) {
-            Text("Memorize!")
-                .font(.largeTitle)
-            score
-            Spacer()
-                .frame(maxWidth: .infinity)
-                .frame(height: 0)
-            cards
-                .foregroundColor(.orange)
-            HStack{
-                buttonShuffle
+            if !isProgressView{
+                HStack{
+                    score
+                    Spacer()
+                    TimerView()
+                }
                 Spacer()
-                buttonNewGame
+                cards
+                    .foregroundColor(.orange)
+                HStack{
+                    buttonShuffle
+                    Spacer()
+                    buttonNewGame
+                }
+                
+            } else {
+                ProgressView()
+                    .scaleEffect(3)
+                    .tint(.orange)
+                    .onAppear{
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
+                            withAnimation{
+                                isProgressView = false
+                                isDelayOut = true
+                            }
+                        }
+                    }
             }
-                        
         }
-        .padding()
+                .padding()
+                .onChange(of: isDelayOut){ newValue in
+                    if newValue {
+                        isDelayOut = true
+                        isProgressView = false
+                    }
+                    
+                }
+        
     }
 
     private var score: some View{
@@ -49,6 +75,11 @@ struct EmojiMemoryGameView: View {
             viewModel.newGame()
             viewModel.shuffle()
         }
+        .padding(.horizontal, 20)
+        .padding(.vertical, 10)
+        .background(Color(.orange))
+        .cornerRadius(10)
+        .foregroundColor(.white)
     }
     private var buttonShuffle: some View{
         Button("Shuffle"){
@@ -56,6 +87,11 @@ struct EmojiMemoryGameView: View {
                 viewModel.shuffle()
             }
         }
+        .padding(.horizontal, 20)
+        .padding(.vertical, 10)
+        .background(Color(.orange))
+        .cornerRadius(10)
+        .foregroundColor(.white)
     }
     
     private var cards: some View {
