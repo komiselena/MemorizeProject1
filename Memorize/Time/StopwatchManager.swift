@@ -14,7 +14,7 @@ class StopwatchManager: ObservableObject{
     
     func start(){
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true){ timer in
-            self.secondElapsed += 1
+            self.secondElapsed += 0.5
             print("\(self.secondElapsed)")
             
         }
