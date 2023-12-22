@@ -19,9 +19,7 @@ struct EmojiMemoryGameView: View {
     
     private let aspectRatio: CGFloat = 3/4
     private let spacing: CGFloat = 4
-    private let dealInterval = 0.15
-    private let dealAnimation: Animation = .easeInOut(duration: 1)
-    private let deckWidth: CGFloat = 50
+
     
     var body: some View {
         VStack(alignment: .center) {
@@ -29,7 +27,7 @@ struct EmojiMemoryGameView: View {
                 HStack{
                     score
                     Spacer()
-                    TimerView()
+                    TimerView
                 }
                 Spacer()
                 cards
@@ -38,6 +36,13 @@ struct EmojiMemoryGameView: View {
                     buttonShuffle
                     Spacer()
                     buttonNewGame
+                }
+                .onAppear{
+                    stopwatchManager.start()
+                    viewModel.shuffle()
+                }
+                .onDisappear{
+                    stopwatchManager.stop()
                 }
                 
             } else {
@@ -54,17 +59,24 @@ struct EmojiMemoryGameView: View {
                     }
             }
         }
-                .padding()
-                .onChange(of: isDelayOut){ newValue in
-                    if newValue {
-                        isDelayOut = true
-                        isProgressView = false
-                    }
-                    
-                }
+        .padding()
+        .onChange(of: isDelayOut){ newValue in
+            if newValue {
+                stopwatchManager.start()
+                isDelayOut = true
+                isProgressView = false
+            }
+        }
+
         
     }
-
+    
+    private var TimerView: some View{
+        Text(String(format: "%.1f", stopwatchManager.secondElapsed))
+            .font(.system(size: 30))
+            .foregroundColor(.black)
+    }
+    
     private var score: some View{
         Text("Score: \(viewModel.score)")
             .font(.title2)
@@ -72,8 +84,10 @@ struct EmojiMemoryGameView: View {
     }
     private var buttonNewGame: some View{
         Button("New Game"){
-            viewModel.newGame()
-            viewModel.shuffle()
+            withAnimation{
+                viewModel.newGame()
+                viewModel.shuffle()
+            }
         }
         .padding(.horizontal, 20)
         .padding(.vertical, 10)
@@ -83,7 +97,7 @@ struct EmojiMemoryGameView: View {
     }
     private var buttonShuffle: some View{
         Button("Shuffle"){
-            withAnimation{
+            withAnimation(.easeInOut){
                 viewModel.shuffle()
             }
         }
@@ -108,7 +122,6 @@ struct EmojiMemoryGameView: View {
     
     private func view(for card: Card) -> some View {
         CardView(card)
-            .matchedGeometryEffect(id: card.id, in: dealingNamespace)
             .transition(.asymmetric(insertion: .identity, removal: .identity))
     }
     
@@ -128,40 +141,6 @@ struct EmojiMemoryGameView: View {
         return card.id == id ? amount : 0
     }
     
-    // MARK: - Dealing from a Deck
-    
-    @State private var dealt = Set<Card.ID>()
-    
-    private func isDealt(_ card: Card) -> Bool {
-        dealt.contains(card.id)
-    }
-    private var undealtCards: [Card] {
-        viewModel.cards.filter { !isDealt($0) }
-    }
-    
-    @Namespace private var dealingNamespace
-    
-    private var deck: some View {
-        ZStack {
-            ForEach(undealtCards) { card in
-                view(for: card)
-            }
-        }
-        .frame(width: deckWidth, height: deckWidth / aspectRatio)
-        .onTapGesture {
-            deal()
-        }
-    }
-    
-    private func deal() {
-        var delay: TimeInterval = 0.5
-        for card in viewModel.cards {
-            withAnimation(dealAnimation.delay(delay)) {
-                _ = dealt.insert(card.id)
-            }
-            delay += dealInterval
-        }
-    }
 }
 
 struct EmojiMemoryGameView_Previews: PreviewProvider {

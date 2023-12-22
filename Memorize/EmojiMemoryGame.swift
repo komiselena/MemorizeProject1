@@ -2,7 +2,7 @@
 //  EmojiMemoryGame.swift
 //  Memorize
 //
-//  Created by Mac on 13.11.2023.
+//  Created by Mac on 22.12.2023.
 //
 
 import SwiftUI
@@ -44,7 +44,7 @@ class EmojiMemoryGame: ObservableObject{
                 return "⁉️"
             }
             return shuffledEmojis[pairIndex]
-        } 
+        }
     }
         
 

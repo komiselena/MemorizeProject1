@@ -9,13 +9,15 @@ import SwiftUI
 
 struct TimerView: View {
     @ObservedObject var stopwatchManager = StopwatchManager()
-    @ScaledMetric var secondsSize: CGFloat = 30.0
+    @ScaledMetric var secondsSize: CGFloat = 30
     
     var body: some View {
         Text(String(stopwatchManager.secondElapsed))
             .font(.system(size: secondsSize))
             .foregroundColor(.black)
     }
+
+    
 }
 #Preview {
     TimerView()

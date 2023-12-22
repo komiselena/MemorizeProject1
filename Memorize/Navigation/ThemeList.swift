@@ -20,6 +20,7 @@ struct ThemeList: View {
             List(store.themes){ theme in
                 NavigationLink(destination: {
                     Text("Memorize!")
+                        .offset(y: -40)
                         .font(.largeTitle)
                         .foregroundColor(.orange)
                         .bold()
