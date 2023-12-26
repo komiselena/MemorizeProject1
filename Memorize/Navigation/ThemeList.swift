@@ -19,13 +19,9 @@ struct ThemeList: View {
         NavigationStack{
             List(store.themes){ theme in
                 NavigationLink(destination: {
-                    Text("Memorize!")
-                        .offset(y: -40)
-                        .font(.largeTitle)
-                        .foregroundColor(.orange)
-                        .bold()
                     Text(theme.name)
-                        .font(.title)
+                        .font(.system(size: 30, weight: .semibold, design: .rounded))
+                        .offset(y: -50)
                     EmojiMemoryGameView(viewModel: EmojiMemoryGame(theme: theme))
                 }){
                     Text(theme.name)

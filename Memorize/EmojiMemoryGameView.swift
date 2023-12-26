@@ -22,52 +22,66 @@ struct EmojiMemoryGameView: View {
 
     
     var body: some View {
-        VStack(alignment: .center) {
-            if !isProgressView{
-                HStack{
-                    score
+        if !viewModel.isFinishView{
+            VStack(alignment: .center) {
+                if !isProgressView{
+                    Text("Memorize!")
+                        .offset(y: -60)
+                        .font(.largeTitle)
+                        .foregroundColor(.orange)
+                        .bold()
+                    HStack{
+                        score
+                        Spacer()
+                        TimerView
+                    }
                     Spacer()
-                    TimerView
-                }
-                Spacer()
-                cards
-                    .foregroundColor(.orange)
-                HStack{
-                    buttonShuffle
-                    Spacer()
-                    buttonNewGame
-                }
-                .onAppear{
-                    stopwatchManager.start()
-                    viewModel.shuffle()
-                }
-                .onDisappear{
-                    stopwatchManager.stop()
-                }
-                
-            } else {
-                ProgressView()
-                    .scaleEffect(3)
-                    .tint(.orange)
+                    cards
+                        .foregroundColor(.orange)
+                    HStack{
+                        buttonShuffle
+                        Spacer()
+                        buttonNewGame
+                    }
                     .onAppear{
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
-                            withAnimation{
-                                isProgressView = false
-                                isDelayOut = true
+                        stopwatchManager.start()
+                        viewModel.shuffle()
+                    }
+                    .onDisappear{
+                        stopwatchManager.stop()
+                        
+                    }
+                    
+                } else {
+                    ProgressView()
+                        .scaleEffect(3)
+                        .tint(.orange)
+                        .onAppear{
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
+                                withAnimation{
+                                    isProgressView = false
+                                    isDelayOut = true
+                                }
                             }
                         }
-                    }
+                }
+                
+            }
+            
+            .padding()
+            .onChange(of: isDelayOut){ newValue in
+                if newValue {
+                    stopwatchManager.timer.invalidate()
+                    isDelayOut = true
+                    isProgressView = false
+                    stopwatchManager.start()
+                }
+            }
+        }else{
+            VStack{
+                FinishView(viewModel: EmojiMemoryGame(), stopWatch: StopwatchManager())
             }
         }
-        .padding()
-        .onChange(of: isDelayOut){ newValue in
-            if newValue {
-                stopwatchManager.start()
-                isDelayOut = true
-                isProgressView = false
-            }
-        }
-
         
     }
     
@@ -87,6 +101,7 @@ struct EmojiMemoryGameView: View {
             withAnimation{
                 viewModel.newGame()
                 viewModel.shuffle()
+                stopwatchManager.start()
             }
         }
         .padding(.horizontal, 20)

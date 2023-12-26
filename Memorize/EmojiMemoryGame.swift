@@ -46,7 +46,10 @@ class EmojiMemoryGame: ObservableObject{
             return shuffledEmojis[pairIndex]
         }
     }
-        
+    
+    var isFinishView: Bool {
+        model.isFinishView
+    }
 
     var cards: Array<Card> {
         model.cards
