@@ -13,8 +13,7 @@ struct EmojiMemoryGameView: View {
     @ObservedObject var viewModel: EmojiMemoryGame
     typealias Card = MemoryGame<String>.Card
     @ObservedObject var stopwatchManager = StopwatchManager()
-    @State var isProgressView = true
-    @State private var isDelayOut = false
+    
 
     
     private let aspectRatio: CGFloat = 3/4
@@ -22,67 +21,32 @@ struct EmojiMemoryGameView: View {
 
     
     var body: some View {
-        if !viewModel.isFinishView{
-            VStack(alignment: .center) {
-                if !isProgressView{
-                    Text("Memorize!")
-                        .offset(y: -60)
-                        .font(.largeTitle)
-                        .foregroundColor(.orange)
-                        .bold()
-                    HStack{
-                        score
-                        Spacer()
-                        TimerView
-                    }
-                    Spacer()
-                    cards
-                        .foregroundColor(.orange)
-                    HStack{
-                        buttonShuffle
-                        Spacer()
-                        buttonNewGame
-                    }
-                    .onAppear{
-                        stopwatchManager.start()
-                        viewModel.shuffle()
-                    }
-                    .onDisappear{
-                        stopwatchManager.stop()
-                        
-                    }
-                    
-                } else {
-                    ProgressView()
-                        .scaleEffect(3)
-                        .tint(.orange)
-                        .onAppear{
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
-                                withAnimation{
-                                    isProgressView = false
-                                    isDelayOut = true
-                                }
-                            }
-                        }
-                }
-                
+        VStack(alignment: .center) {
+            Text("Memorize!")
+                .offset(y: -60)
+                .font(.largeTitle)
+                .foregroundColor(.orange)
+                .bold()
+            HStack{
+                score
+                Spacer()
+                TimerView
             }
-            
-            .padding()
-            .onChange(of: isDelayOut){ newValue in
-                if newValue {
-                    stopwatchManager.timer.invalidate()
-                    isDelayOut = true
-                    isProgressView = false
-                    stopwatchManager.start()
-                }
+            Spacer()
+            cards
+                .foregroundColor(.orange)
+            HStack{
+                buttonShuffle
+                Spacer()
+                buttonNewGame
             }
-        }else{
-            VStack{
-                FinishView(viewModel: EmojiMemoryGame(), stopWatch: StopwatchManager())
+            .onAppear{
+                stopwatchManager.start()
+                viewModel.shuffle()
             }
         }
         
+        .padding()
     }
     
     private var TimerView: some View{

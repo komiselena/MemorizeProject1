@@ -13,36 +13,40 @@ struct FinishView: View {
     
     var body: some View {
         ZStack{
-            RadialGradient(colors: [Color(#colorLiteral(red: 1, green: 0.5757583976, blue: 0.3030374944, alpha: 1)), Color(#colorLiteral(red: 0.3098039329, green: 0.2039215714, blue: 0.03921568766, alpha: 1))],
-                           center: .center,
-                           startRadius: 5, endRadius: 500)
+            RadialGradient(colors: [Color(#colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)), Color(#colorLiteral(red: 0, green: 0.6110873818, blue: 0.5621060729, alpha: 1))],
+                           center: .bottom,
+                           startRadius: 70, endRadius: 500)
             .ignoresSafeArea()
-            Text("Good Job!!")
+            Text("Good Job!")
                 .font(.system(size: 70, weight: .semibold, design: .rounded))
                 .foregroundColor(.white)
                 .lineLimit(1)
                 .offset(y: -250)
+                .glowBorder(color: .black, lineWidth: 5)
             HStack{
-                Text("""
-                You have
-                scored: \(viewModel.score)
-                """)
+                Text("You have scored: \(viewModel.score)")
                 .font(.title)
                 .padding(50)
                 .foregroundColor(.white)
+                .lineLimit(4)
                 Spacer()
-                Text("""
-                    You did it in:
-                    \(stopWatch.finishSeconds)
-                    """)
+                Text("You did it in: \(stopWatch.secondElapsed) seconds")
                 .font(.title)
                 .padding(50)
                 .foregroundColor(.white)
+                .lineLimit(4)
                 
+            }
+            
+        }
+        .onAppear {
+            if viewModel.isFinishView {
+                stopWatch.stop()
             }
         }
         
     }
+
 }
 
 #Preview {

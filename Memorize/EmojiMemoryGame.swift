@@ -14,26 +14,16 @@ class EmojiMemoryGame: ObservableObject{
     
     @ObservedObject var store: EmojiMemoryThemeStore
     private(set) var chosenTheme: EmojiMemoryTheme
-    @Published private(set) var model: MemoryGame<String>
+    private(set) var model: MemoryGame<String>
     
-    func newGame(){
-        self.model = createMemoryGame(with: chosenTheme.emojis)
-        objectWillChange.send()
-    }
-    /*
-     func newGame(){
-         let randomTheme: [String] = EmojiMemoryGame.ThemeEmojis.randomElement() ?? []
-         self.model = EmojiMemoryGame.createMemoryGame(with: randomTheme)
-         objectWillChange.send()
-     }
-     */
-    // chosenTheme это тема которую пользователь выбрал в навигации
-    
+    @ObservedObject var stopWatch: StopwatchManager
+
     init(theme: EmojiMemoryTheme? = nil) {
         self.store = EmojiMemoryThemeStore(named: "Store")
         self.chosenTheme = theme ?? EmojiMemoryTheme.templates.randomElement()!
         let emojis = self.chosenTheme.emojis.shuffled()
         model = MemoryGame(numberOfPairsOfCards: self.chosenTheme.emojis.count) { emojis[$0] }
+        stopWatch = StopwatchManager()
     }
 
     
@@ -47,8 +37,14 @@ class EmojiMemoryGame: ObservableObject{
         }
     }
     
+    func newGame() {
+        self.model = createMemoryGame(with: chosenTheme.emojis)
+        objectWillChange.send()
+        stopWatch.start()
+    }
+    
     var isFinishView: Bool {
-        model.isFinishView
+        model.cards.allSatisfy{ $0.isMatched }
     }
 
     var cards: Array<Card> {
@@ -74,7 +70,13 @@ class EmojiMemoryGame: ObservableObject{
 
     func choose(_ card: Card){
         model.choose(card)
-        objectWillChange.send()
+        if isFinishView {
+            print("finishView")
+            DispatchQueue.main.async {
+                self.stopWatch.stop()
+                self.objectWillChange.send()
+            }
+        }
     }
     
     

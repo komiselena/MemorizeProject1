@@ -23,7 +23,7 @@ class StopwatchManager: ObservableObject{
     func stop(){
         finishSeconds = secondElapsed
         timer.invalidate()
-        secondElapsed = 0
+
     }
     
 }

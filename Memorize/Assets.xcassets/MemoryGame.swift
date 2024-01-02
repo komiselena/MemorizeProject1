@@ -63,6 +63,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
                         score += 2
                         score += 2 + cards[chosenIndex].bonus + cards[potentialMatchIndex].bonus
                         score += 2
+                        
                     }else{
                         if cards[chosenIndex].hasBeenSeen{
                             score -= 1
@@ -79,9 +80,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
         }
     }
     
-    var isFinishView: Bool{
-        return cards.allSatisfy { $0.isMatched }
-    }
+
     
     mutating func shuffle(){
         cards.shuffle()
