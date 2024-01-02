@@ -60,15 +60,9 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
                     if cards[chosenIndex].content == cards[potentialMatchIndex].content{
                         cards[chosenIndex].isMatched = true
                         cards[potentialMatchIndex].isMatched = true
-<<<<<<< HEAD
                         score += 2
-=======
-<<<<<<< HEAD
                         score += 2 + cards[chosenIndex].bonus + cards[potentialMatchIndex].bonus
-=======
                         score += 2
->>>>>>> main
->>>>>>> first
                     }else{
                         if cards[chosenIndex].hasBeenSeen{
                             score -= 1
@@ -94,25 +88,16 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
         
         var isFaceUp: Bool = false{
             didSet{
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
                 if isFaceUp{
                     startUsingBonusTime()
                 } else{
                     stopUsingBonusTime()
                 }
-=======
->>>>>>> main
->>>>>>> first
                 if oldValue && !isFaceUp{
                     hasBeenSeen = true
                 }
             }
         }
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
         var hasBeenSeen: Bool = false
         var isMatched: Bool = false{
             didSet{
@@ -122,17 +107,11 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
             }
         }
         let content: CardContent
-=======
->>>>>>> first
         var isMatched: Bool = false
         let content: CardContent
         var hasBeenSeen: Bool = false
         
-<<<<<<< HEAD
-=======
->>>>>>> main
->>>>>>> first
-        
+
         var id: String
         var debugDescription: String {
             return "\(id): \(content), \(isFaceUp ? "up" : "down")\(isMatched ? "matched" : "")"
