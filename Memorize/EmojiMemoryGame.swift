@@ -17,10 +17,6 @@ class EmojiMemoryGame: ObservableObject{
     private(set) var model: MemoryGame<String>
     @ObservedObject var stopWatch: StopwatchManager
 
-
-
-
-
     init(theme: EmojiMemoryTheme? = nil) {
         self.store = EmojiMemoryThemeStore(named: "Store")
         self.chosenTheme = theme ?? EmojiMemoryTheme.templates.randomElement()!
