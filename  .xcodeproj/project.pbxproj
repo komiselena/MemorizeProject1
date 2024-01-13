@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		043B5C272B5313A400FA053B /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043B5C262B5313A400FA053B /* TimerManager.swift */; };
+		043B5C292B5313B100FA053B /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043B5C282B5313B100FA053B /* TimerView.swift */; };
 		04554F132B023511006E6913 /* MemorizeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04554F122B023511006E6913 /* MemorizeApp.swift */; };
 		04554F152B023511006E6913 /* EmojiMemoryGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04554F142B023511006E6913 /* EmojiMemoryGameView.swift */; };
 		04554F172B023513006E6913 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04554F162B023513006E6913 /* Assets.xcassets */; };
@@ -41,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		043B5C262B5313A400FA053B /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
+		043B5C282B5313B100FA053B /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		04554F0F2B023511006E6913 /* Memorize.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Memorize.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04554F122B023511006E6913 /* MemorizeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeApp.swift; sourceTree = "<group>"; };
 		04554F142B023511006E6913 /* EmojiMemoryGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiMemoryGameView.swift; sourceTree = "<group>"; };
@@ -114,6 +118,8 @@
 				04BD54372B16551700591CB0 /* Cardify.swift */,
 				04554F3E2B0280AB006E6913 /* EmojiMemoryGame.swift */,
 				04554F142B023511006E6913 /* EmojiMemoryGameView.swift */,
+				043B5C262B5313A400FA053B /* TimerManager.swift */,
+				043B5C282B5313B100FA053B /* TimerView.swift */,
 				04BD54332B16489400591CB0 /* CardView.swift */,
 				04BD54312B16452700591CB0 /* AspectVGrid.swift */,
 				04554F122B023511006E6913 /* MemorizeApp.swift */,
@@ -279,10 +285,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				04554F152B023511006E6913 /* EmojiMemoryGameView.swift in Sources */,
+				043B5C272B5313A400FA053B /* TimerManager.swift in Sources */,
 				04554F3D2B023565006E6913 /* MemoryGame.swift in Sources */,
 				046011DC2B1F592C006E4F4D /* FlyingNumber.swift in Sources */,
 				04BD54382B16551700591CB0 /* Cardify.swift in Sources */,
 				04554F132B023511006E6913 /* MemorizeApp.swift in Sources */,
+				043B5C292B5313B100FA053B /* TimerView.swift in Sources */,
 				04BD54322B16452700591CB0 /* AspectVGrid.swift in Sources */,
 				04BD54362B164D8200591CB0 /* Pie.swift in Sources */,
 				04BD54342B16489400591CB0 /* CardView.swift in Sources */,

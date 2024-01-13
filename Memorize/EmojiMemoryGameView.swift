@@ -12,6 +12,7 @@ import SwiftUI
 struct EmojiMemoryGameView: View {
     @ObservedObject var viewModel: EmojiMemoryGame
     typealias Card = MemoryGame<String>.Card
+    @ObservedObject var timerManager = TimerManager()
     
     private let aspectRatio: CGFloat = 4/5
     private let spacing: CGFloat = 4
@@ -20,11 +21,15 @@ struct EmojiMemoryGameView: View {
     private let deckWidth: CGFloat = 50
     
     var body: some View {
-        
         VStack{
             Text("Memorize!")
                 .font(.largeTitle)
-            score
+                .padding()
+            HStack{
+                score
+                Spacer()
+                time
+            }
             cards
                 .foregroundColor(.orange)
             HStack{
@@ -36,11 +41,20 @@ struct EmojiMemoryGameView: View {
             }
         }
         .padding()
+        .onAppear{
+            timerManager.start()
+        }
+    }
+    
+    private var time: some View{
+        Text(String(timerManager.secondsElapsed))
+            .font(.system(size: 30))
+            .foregroundColor(.black)
     }
 
     private var score: some View{
         Text("Score: \(viewModel.score)")
-            .font(.title2)
+            .font(.system(size: 30))
             .animation(nil)
     }
     private var buttonNewGame: some View{
