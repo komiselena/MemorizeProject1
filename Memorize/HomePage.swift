@@ -35,7 +35,7 @@ struct HomePage: View {
             VStack{
                 if showThemeList{
                     withAnimation{
-                        ThemeList(store: EmojiMemoryThemeStore(named: "store"), viewModel: EmojiMemoryGame())
+                        ThemeList(store: EmojiMemoryThemeStore(named: "store"), viewModel: EmojiMemoryGame(), allCardsMatch: false)
                     }
                 }else{
                     VStack{
@@ -60,27 +60,6 @@ struct HomePage: View {
                             
                         }
                         
-                        ZStack{
-                            
-                            RoundedRectangle(cornerRadius: 50.0)
-                                .frame(width: 270, height: 70)
-                                .foregroundColor(.orange)
-                                .offset(y: 200)
-
-                            
-                            Button("Continue"){
-                                
-                            }
-                            .frame(width: 260, height: 60)
-                            .foregroundColor(.orange)
-                            .font(.title)
-                            .background(Color(.white))
-                            .shadow(radius: 20)
-                            .cornerRadius(50)
-                            .offset(y: 200)
-
-                            
-                        }
                         
                         ZStack{
                             RoundedRectangle(cornerRadius: 50.0)

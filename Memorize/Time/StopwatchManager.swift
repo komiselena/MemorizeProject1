@@ -11,7 +11,7 @@ import SwiftUI
 class StopwatchManager: ObservableObject{
     @Published var secondElapsed: TimeInterval = 0
     var timer = Timer()
-    @Published var finishSeconds: TimeInterval = 0
+    @Published var finishSeconds: TimeInterval = 0 
 
     
     func start(){

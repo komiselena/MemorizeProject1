@@ -13,16 +13,7 @@ struct MemorizeApp: App{
     
     var body: some Scene{
         WindowGroup{
-            TabView{
-                HomePage()
-                    .tabItem{
-                        Label("Home", systemImage: "house")
-                    }
-                ThemeList(store: EmojiMemoryThemeStore(named: "Store"), viewModel: EmojiMemoryGame())
-                    .tabItem{
-                        Label("Themes", systemImage: "list.triangle")
-                    }
-            }
+            HomePage()
         }
     }
 }

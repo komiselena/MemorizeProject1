@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct EmojiMemoryTheme: Codable, Identifiable, Hashable {
+struct EmojiMemoryTheme: Identifiable, Hashable, Codable {
     var name: String
     var emojis: [String]
     var id = UUID()

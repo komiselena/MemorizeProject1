@@ -9,40 +9,41 @@ import SwiftUI
 
 struct FinishView: View {
     @State var showThemeList = false
+    @State private var isReplayButtonTapped = false
     @ObservedObject var viewModel: EmojiMemoryGame
     @ObservedObject var stopwatchManager: StopwatchManager
+    var themeList: ThemeList
     var  finishTime: TimeInterval
     var finalScore: Int
-    @State var replayGame = false
     
     var body: some View {
-        ZStack{
-            RadialGradient(colors: [Color(#colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)), Color(#colorLiteral(red: 0, green: 0.6110873818, blue: 0.5621060729, alpha: 1))],
-                           center: .bottom,
-                           startRadius: 100, endRadius: 500)
-            .ignoresSafeArea()
-            
-            labelGoodJob
-            
-            labels
-
-            Image("FinishViewPicture")
-                .resizable()
-                .scaledToFit()
-                .offset()
-            
-            buttons
+            ZStack{
+                RadialGradient(colors: [Color(#colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)), Color(#colorLiteral(red: 0, green: 0.6110873818, blue: 0.5621060729, alpha: 1))],
+                               center: .bottom,
+                               startRadius: 100, endRadius: 500)
+                .ignoresSafeArea()
+                
+                labels
+                
+                Image("FinishViewPicture")
+                    .resizable()
+                    .scaledToFit()
+                    .offset(y: -40)
+                
+                buttons
                 
             }
-
-        
+/*            .fullScreenCover(isPresented: $isReplayButtonTapped, content: {
+                EmojiMemoryGameView(viewModel: EmojiMemoryGame(theme: themeList.chosenTheme))
+            })
+*/
     }
     
     var buttons: some View{
         VStack{
             if showThemeList{
                 withAnimation{
-                    ThemeList(store: EmojiMemoryThemeStore(named: "store"), viewModel: EmojiMemoryGame())
+                    ThemeList(store: EmojiMemoryThemeStore(named: "store"), viewModel: EmojiMemoryGame(), allCardsMatch: false)
                 }
             }else{
                 ZStack{
@@ -64,6 +65,7 @@ struct FinishView: View {
                 }
             }
             
+                
                 ZStack{
                     RoundedRectangle(cornerRadius: 50.0)
                         .frame(width: 270, height: 80)
@@ -71,11 +73,9 @@ struct FinishView: View {
                         .offset(y: 230)
                     
                     Button("Replay"){
-                        viewModel.newGame()
-                        viewModel.shuffle()
-                        stopwatchManager.start()
-                        replayGame.toggle()
+                        isReplayButtonTapped = true
                     }
+                    
                     .frame(width: 260, height: 70)
                     .foregroundColor(.orange)
                     .font(.title)
@@ -84,19 +84,14 @@ struct FinishView: View {
                     .cornerRadius(50)
                     .offset(y: 230)
                 }
-            }
+
+               
+        }
+            .offset(y: -30)
+
+
     }
     
-    var labelGoodJob: some View{
-        HStack{
-            Text("Good Job!")
-                .font(.system(size: 70, weight: .semibold, design: .rounded))
-                .foregroundColor(.white)
-                .lineLimit(1)
-                .offset(y: -270)
-                .glowBorder(color: .black, lineWidth: 5)
-        }
-    }
     
     var labels: some View {
         HStack {
@@ -111,10 +106,9 @@ struct FinishView: View {
                 .foregroundColor(.black)
                 .glowBorder(color: .white, lineWidth: 20)
 
-            
-
         }
-        .offset(y: -160)
+        .padding()
+        .offset(y: -250)
     }
 
     private var formattedFinishTime: String {
@@ -131,8 +125,9 @@ struct FinishView_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = EmojiMemoryGame()
         let stopwatchManager = StopwatchManager()
+        let themeList = ThemeList(store: EmojiMemoryThemeStore(named: "Store"), viewModel: EmojiMemoryGame(), allCardsMatch: false)
         
-        return FinishView(viewModel: viewModel, stopwatchManager: stopwatchManager, finishTime: stopwatchManager.finishSeconds, finalScore: viewModel.score)
+        return FinishView(viewModel: viewModel, stopwatchManager: stopwatchManager, themeList: ThemeList(store: EmojiMemoryThemeStore(named: "Store"), viewModel: EmojiMemoryGame(theme: themeList.chosenTheme), allCardsMatch: false), finishTime: stopwatchManager.finishSeconds, finalScore: viewModel.score)
             .previewLayout(.sizeThatFits)
             .padding()
         

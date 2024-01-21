@@ -13,16 +13,13 @@ struct EmojiMemoryGameView: View {
     @ObservedObject var viewModel: EmojiMemoryGame
     typealias Card = MemoryGame<String>.Card
     @ObservedObject var stopwatchManager = StopwatchManager()
-    
-
-    
     private let aspectRatio: CGFloat = 3/4
     private let spacing: CGFloat = 4
 
     
     var body: some View {
         VStack {
-            if !viewModel.allCardsMatched {
+            if !viewModel.allCardsMatched{
                 VStack(alignment: .center) {
                     HStack {
                         score
@@ -46,17 +43,20 @@ struct EmojiMemoryGameView: View {
                 }
 
                 .padding()
-            } else {
-                FinishView(
+             } else {
+                    FinishView(
                     viewModel: EmojiMemoryGame(),
                     stopwatchManager: stopwatchManager,
-                    finishTime: stopwatchManager.finishSeconds,
+                    themeList: ThemeList(store: EmojiMemoryThemeStore(named: "Store"), viewModel: EmojiMemoryGame(), allCardsMatch: false), finishTime: stopwatchManager.finishSeconds,
                     finalScore: viewModel.score
-                )
-                .onAppear {
-                    stopwatchManager.finishSeconds = stopwatchManager.secondElapsed
-                }
+                    )
+                    .onAppear {
+                        stopwatchManager.finishSeconds = stopwatchManager.secondElapsed
+                    }
             }
+             
+
+            
         }
         .background(Color.color)
 
